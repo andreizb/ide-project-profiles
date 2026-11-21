@@ -7,7 +7,7 @@ Automatic project-specific plugin selection through the normal IntelliJ IDEA and
 Quit IntelliJ completely first. Keep IntelliJ IDEA and/or Cursor installed in `/Applications`. Install Python 3.9+ and Node.js 22+ with npm; IntelliJ supplies its own JDK and SDK. Then run:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/andreizb/ide-project-profiles/main/install.sh | bash
+curl -fsSL "https://raw.githubusercontent.com/andreizb/ide-project-profiles/main/install.sh?$(date +%s)" | bash
 ```
 
 The installer resolves an exact GitHub commit, downloads it to a unique short-path temporary directory under `/private/tmp`, builds from source, runs the checks, installs the available components, and verifies the installed IntelliJ agent and Cursor extension hosts. Its exit trap removes the downloaded source, npm cache, dependencies, generated test data and build output on success or failure. No checkout is retained or needed at runtime. It does not install IDEs, buy or activate licenses, or change account credentials.
@@ -65,3 +65,5 @@ See [MAINTENANCE.md](MAINTENANCE.md), [dependencies.json](dependencies.json), an
 Use **Enable All Extensions Here** in Cursor workspaces before uninstalling the Cursor component through its Extensions UI; its automatic disable entries are workspace state. Never delete all workspace databases to undo it.
 
 For IntelliJ, remove only the `-javaagent:.../intellij-project-profiles/profile-agent.jar` option from the recorded VM-options file and uninstall Automatic Project Plugins through the IDE, then restart. Keep the inactive agent JARs while any older per-project VM-options copies may still reference them. The installation receipt names the backup directory. Restoring that directory's `idea.vmoptions`, old agent/bridge and companion files while IntelliJ is closed reverts the update. Preserve project profile directories unless you deliberately want to reset settings.
+
+Integration checks keep existing app integrations enabled. On a BYOK-patched Cursor, the disposable process uses a private HOME/database and separate loopback listener; it must not bind, stop or reconfigure the normal user bridge. The raw installer URL uses a cache-busting query so a just-published bootstrap is not shadowed by a cached older version.
