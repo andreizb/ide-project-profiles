@@ -7,7 +7,7 @@ Automatic project-specific plugin selection through the normal IntelliJ IDEA and
 Quit IntelliJ completely first. Keep IntelliJ IDEA and/or Cursor installed in `/Applications`. Install Python 3.9+ and Node.js 22+ with npm; IntelliJ supplies its own JDK and SDK. Then run:
 
 ```sh
-curl -fsSL "https://raw.githubusercontent.com/andreizb/ide-project-profiles/main/install.sh?$(date +%s)" | bash
+gh api -H 'Accept: application/vnd.github.raw+json' repos/andreizb/ide-project-profiles/contents/install.sh | bash
 ```
 
 The installer resolves an exact GitHub commit, downloads it to a unique short-path temporary directory under `/private/tmp`, builds from source, runs the checks, installs the available components, and verifies the installed IntelliJ agent and Cursor extension hosts. Its exit trap removes the downloaded source, npm cache, dependencies, generated test data and build output on success or failure. No checkout is retained or needed at runtime. It does not install IDEs, buy or activate licenses, or change account credentials.
@@ -20,7 +20,7 @@ To verify the installed components later, without a checkout:
 python3 "$HOME/Library/Application Support/IDE Project Profiles/manage.py" verify
 ```
 
-The public command needs no GitHub credentials. To select a specific maintenance commit, download `install.sh` from that commit and pass `IDE_PROFILES_REF=<40-character-commit>` to its Bash process.
+The private repository is downloaded through authenticated GitHub CLI calls. Run `gh auth login` once if needed; credentials stay in gh/OS credential storage and never enter the installer or repository. To select a specific maintenance commit, fetch `install.sh` through the authenticated contents API at that commit and pass `IDE_PROFILES_REF=<40-character-commit>` to its Bash process.
 
 ## Behavior
 
@@ -66,4 +66,4 @@ Use **Enable All Extensions Here** in Cursor workspaces before uninstalling the 
 
 For IntelliJ, remove only the `-javaagent:.../intellij-project-profiles/profile-agent.jar` option from the recorded VM-options file and uninstall Automatic Project Plugins through the IDE, then restart. Keep the inactive agent JARs while any older per-project VM-options copies may still reference them. The installation receipt names the backup directory. Restoring that directory's `idea.vmoptions`, old agent/bridge and companion files while IntelliJ is closed reverts the update. Preserve project profile directories unless you deliberately want to reset settings.
 
-Integration checks keep existing app integrations enabled. On a BYOK-patched Cursor, the disposable process uses a private HOME/database and separate loopback listener; it must not bind, stop or reconfigure the normal user bridge. The raw installer URL uses a cache-busting query so a just-published bootstrap is not shadowed by a cached older version.
+Integration checks keep existing app integrations enabled. On a BYOK-patched Cursor, the disposable process uses a private HOME/database and separate loopback listener; it must not bind, stop or reconfigure the normal user bridge. The bootstrap and commit-pinned archive are fetched through authenticated GitHub API requests, avoiding raw-URL caching and keeping private access in gh credential storage.

@@ -9,17 +9,14 @@ trap 'exit 143' TERM
 mkdir -p "$WORK/tmp"
 export TMPDIR="$WORK/tmp"
 command -v python3 >/dev/null || { echo 'Python 3.9+ is required.' >&2; exit 1; }
-command -v curl >/dev/null || { echo 'curl is required.' >&2; exit 1; }
+command -v gh >/dev/null || { echo 'GitHub CLI and gh auth login are required.' >&2; exit 1; }
 REF="${IDE_PROFILES_REF:-main}"
-curl --fail --silent --show-error --location "https://api.github.com/repos/$REPOSITORY/commits/$REF" -o "$WORK/commit.json"
-SHA="$(python3 - "$WORK/commit.json" <<'PY'
-import json,re,sys
-sha=json.load(open(sys.argv[1]))['sha']
-if not re.fullmatch('[0-9a-f]{40}',sha):raise SystemExit('Invalid GitHub commit')
-print(sha)
-PY
-)"
-curl --fail --silent --show-error --location "https://codeload.github.com/$REPOSITORY/tar.gz/$SHA" -o "$WORK/source.tar.gz"
+SHA="$(gh api "repos/$REPOSITORY/commits/$REF" --jq .sha)"
+python3 - "$SHA" <<'PY_SHA'
+import re,sys
+if not re.fullmatch('[0-9a-f]{40}',sys.argv[1]):raise SystemExit('Invalid GitHub commit')
+PY_SHA
+gh api "repos/$REPOSITORY/tarball/$SHA" > "$WORK/source.tar.gz"
 python3 - "$WORK" <<'PY'
 from pathlib import Path,PurePosixPath
 import sys,tarfile,shutil

@@ -1,6 +1,6 @@
-const vscode=require('vscode'),fs=require('node:fs/promises'),path=require('node:path');
+const vscode=require('vscode'),fs=require('node:fs/promises'),path=require('node:path'),sync=require('node:fs');
 exports.activate=context=>{
- const base=process.env.IDE_PROFILES_VERIFY_DIR,folder=vscode.workspace.workspaceFolders?.[0];
+ const base=JSON.parse(sync.readFileSync(path.join(__dirname,'context.json'),'utf8')).base,folder=vscode.workspace.workspaceFolders?.[0];
  if(!base||!folder||!folder.uri.fsPath.startsWith(path.join(base,'fixtures')+path.sep))return;
  const timer=setInterval(async()=>{try{
   const channel=context.workspaceState._storage;if(context.workspaceState._shared!==false)throw Error('Wrong workspace scope');
