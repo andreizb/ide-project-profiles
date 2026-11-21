@@ -4,7 +4,7 @@ Automatic project-specific plugin selection through the normal IntelliJ IDEA and
 
 ## Install or update on macOS
 
-Quit IntelliJ completely first. Keep IntelliJ IDEA and/or Cursor installed in `/Applications`. Install Python 3.9+ and Node.js 22+ with npm; IntelliJ supplies its own JDK and SDK. Then run:
+Quit IntelliJ completely first. Keep IntelliJ IDEA and/or Cursor installed in `/Applications`. Install Python 3.9+, GitHub CLI (`gh auth login`), and Node.js 22+ with npm; IntelliJ supplies its own JDK and SDK. Then run:
 
 ```sh
 gh api -H 'Accept: application/vnd.github.raw+json' repos/andreizb/ide-project-profiles/contents/install.sh | bash
