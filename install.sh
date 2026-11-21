@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 REPOSITORY="andreizb/ide-project-profiles"
-WORK="$(mktemp -d "${TMPDIR:-/private/tmp}/ide-project-profiles-install.XXXXXXXX")"
+WORK="$(mktemp -d /private/tmp/ipp-install.XXXXXXXX)"
 cleanup() { rm -rf -- "$WORK"; }
 trap cleanup EXIT
 trap 'exit 130' INT

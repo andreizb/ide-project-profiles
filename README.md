@@ -10,7 +10,7 @@ Quit IntelliJ completely first. Keep IntelliJ IDEA and/or Cursor installed in `/
 curl -fsSL https://raw.githubusercontent.com/andreizb/ide-project-profiles/main/install.sh | bash
 ```
 
-The installer resolves an exact GitHub commit, downloads it to a unique temporary directory, builds from source, runs the checks, installs the available components, and verifies the installed IntelliJ agent and Cursor extension hosts. Its exit trap removes the downloaded source, npm cache, dependencies, generated test data and build output on success or failure. No checkout is retained or needed at runtime. It does not install IDEs, buy or activate licenses, or change account credentials.
+The installer resolves an exact GitHub commit, downloads it to a unique short-path temporary directory under `/private/tmp`, builds from source, runs the checks, installs the available components, and verifies the installed IntelliJ agent and Cursor extension hosts. Its exit trap removes the downloaded source, npm cache, dependencies, generated test data and build output on success or failure. No checkout is retained or needed at runtime. It does not install IDEs, buy or activate licenses, or change account credentials.
 
 Only this project's plugins are installed. Other language plugins/extensions remain managed through their native marketplaces. Existing configuration, Java VM flags, extension identities and workspace choices are preserved. A new IntelliJ JVM or Cursor window/reload applies an update. Installation fails before replacing runtime files if source build or tests fail. Backups and a persistent installation receipt are retained locally; a failure after replacement is reported with those backups available for recovery.
 

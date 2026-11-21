@@ -16,23 +16,21 @@ with tempfile.TemporaryDirectory(prefix='ide-profile-host-') as folder:
   p=base/'fixtures'/name;p.mkdir(parents=True);(p/('example'+suffix)).write_text('# local verification fixture\n')
  env=os.environ.copy();env['IDE_PROFILES_VERIFY_DIR']=str(base)
  try:
-  for name in ['java','latex','python']:
+  reports={}
+  for name,expected in [('java',{'verification.java'}),('latex',{'verification.latex'}),('python',set())]:
    subprocess.run([str(cli),'--classic','--new-window','--user-data-dir',str(base/'data'),'--extensions-dir',str(extensions),'--disable-workspace-trust','--skip-welcome','--skip-release-notes',str(base/'fixtures'/name)],env=env,cwd=cli.parent,check=True,stdout=subprocess.DEVNULL)
-  deadline=time.monotonic()+100;reports={}
-  while time.monotonic()<deadline:
-   ready=True
-   for name,expected in [('java',{'verification.java'}),('latex',{'verification.latex'}),('python',set())]:
+   deadline=time.monotonic()+90
+   while time.monotonic()<deadline:
     try:
      d=json.loads((results/(name+'.json')).read_text());enabled=set(d['enabled']);local={e['id'] for e in d.get('local') or []};all_ids={'verification.java','verification.latex','verification.sql'}
      assert d['active'] and d['version']==package['version'];assert not d['global'];assert enabled&all_ids==expected;assert all_ids-expected<=local
      state=Path(d['workspaceStorage']).parent/'andrei-local.automatic-project-extensions/state.json';history=json.loads(state.read_text());assert len(history['workspaces'])==1
-     reports[name]=d
-    except (OSError,ValueError,KeyError,AssertionError):ready=False
-   if ready:break
-   time.sleep(1)
-  else:
-   problems=(base/'probe-error.txt').read_text() if (base/'probe-error.txt').exists() else ', '.join(p.name for p in results.iterdir())
-   raise RuntimeError('Cursor host verification did not reach independent workspace states: '+problems)
+     os.kill(d['pid'],0);reports[name]=d;break
+    except (OSError,ValueError,KeyError,AssertionError):time.sleep(1)
+   else:
+    problems=(base/'probe-error.txt').read_text() if (base/'probe-error.txt').exists() else ', '.join(p.name for p in results.iterdir())
+    raise RuntimeError('Cursor host did not reach independent workspace state for '+name+': '+problems)
+  for report in reports.values():os.kill(report['pid'],0)
   assert len({r['pid'] for r in reports.values()})==3
   print('PASS: installed Cursor bundle active in Java/LaTeX/Python hosts concurrently; workspace disable lists independent; global disable list unchanged')
  finally:
