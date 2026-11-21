@@ -1,0 +1,23 @@
+<idea-plugin require-restart="true">
+  <id>ro.andrei.ideprofiles</id>
+  <name>Automatic Project Plugins</name>
+  <version>0.2.0</version>
+  <vendor>IDE Project Profiles contributors</vendor>
+  <description>Automatically selects installed plugins for each project and opens it in an isolated IntelliJ process. Uses the normal IntelliJ Open and Recent Projects workflow.</description>
+  <idea-version since-build="263.7307.200" until-build="263.7307.200"/>
+  <depends>com.intellij.modules.platform</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationInitializedListener implementation="ro.andrei.ideprofiles.ProfileStartup" order="first"/>
+    <postStartupActivity implementation="ro.andrei.ideprofiles.ProfileProjectActivity"/>
+    <notificationGroup id="Automatic Project Plugins" displayType="BALLOON"/>
+  </extensions>
+  <applicationListeners>
+    <listener class="ro.andrei.ideprofiles.MacOsPriorityKeymap" topic="com.intellij.ide.AppLifecycleListener"/>
+    <listener class="ro.andrei.ideprofiles.ProfileCloseListener" topic="com.intellij.openapi.project.ProjectManagerListener"/>
+  </applicationListeners>
+  <actions>
+    <action id="AutomaticProjectPlugins.Profile" class="ro.andrei.ideprofiles.ProfileAction" text="Project Plugin Profile…" description="View the detected technologies and selected plugins for this project">
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </action>
+  </actions>
+</idea-plugin>

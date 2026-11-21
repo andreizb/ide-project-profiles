@@ -1,0 +1,127 @@
+{
+  "com.intellij": {
+    "id": "com.intellij",
+    "name": "com.intellij",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.java": {
+    "id": "com.intellij.java",
+    "name": "com.intellij.java",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.java",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.java.ide": {
+    "id": "com.intellij.java.ide",
+    "name": "com.intellij.java.ide",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.java.ide",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.modules.json": {
+    "id": "com.intellij.modules.json",
+    "name": "com.intellij.modules.json",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.modules.json",
+    "bundled": true,
+    "requires": []
+  },
+  "ro.andrei.ideprofiles": {
+    "id": "ro.andrei.ideprofiles",
+    "name": "ro.andrei.ideprofiles",
+    "version": "fixture",
+    "path": "/fixtures/plugins/ro.andrei.ideprofiles",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.settingsSync": {
+    "id": "com.intellij.settingsSync",
+    "name": "com.intellij.settingsSync",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.settingsSync",
+    "bundled": true,
+    "requires": []
+  },
+  "PythonCore": {
+    "id": "PythonCore",
+    "name": "PythonCore",
+    "version": "fixture",
+    "path": "/fixtures/plugins/PythonCore",
+    "bundled": true,
+    "requires": []
+  },
+  "Pythonid": {
+    "id": "Pythonid",
+    "name": "Pythonid",
+    "version": "fixture",
+    "path": "/fixtures/plugins/Pythonid",
+    "bundled": true,
+    "requires": [
+      "PythonCore"
+    ]
+  },
+  "org.jetbrains.android": {
+    "id": "org.jetbrains.android",
+    "name": "org.jetbrains.android",
+    "version": "fixture",
+    "path": "/fixtures/plugins/org.jetbrains.android",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.spring": {
+    "id": "com.intellij.spring",
+    "name": "com.intellij.spring",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.spring",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.hibernate": {
+    "id": "com.intellij.hibernate",
+    "name": "com.intellij.hibernate",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.hibernate",
+    "bundled": true,
+    "requires": [
+      "com.intellij.javaee.jpa",
+      "com.intellij.database"
+    ]
+  },
+  "com.intellij.javaee.jpa": {
+    "id": "com.intellij.javaee.jpa",
+    "name": "com.intellij.javaee.jpa",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.javaee.jpa",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.database": {
+    "id": "com.intellij.database",
+    "name": "com.intellij.database",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.database",
+    "bundled": true,
+    "requires": []
+  },
+  "JavaScript": {
+    "id": "JavaScript",
+    "name": "JavaScript",
+    "version": "fixture",
+    "path": "/fixtures/plugins/JavaScript",
+    "bundled": true,
+    "requires": []
+  },
+  "com.intellij.react": {
+    "id": "com.intellij.react",
+    "name": "com.intellij.react",
+    "version": "fixture",
+    "path": "/fixtures/plugins/com.intellij.react",
+    "bundled": true,
+    "requires": []
+  }
+}

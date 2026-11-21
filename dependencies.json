@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "python": {"minimum": "3.9", "dependencies": "standard library only"},
+  "intellij": {"testedBuild": "263.7307.200", "sdk": "locally installed IDEA Contents/lib", "jdk": "locally installed IDEA bundled JBR", "redistributedSdk": false},
+  "cursor": {"testedApplication": "3.31.15", "minimumVscodeEngine": "1.128.0", "nodeMinimum": "22", "npmLockfile": "cursor/package-lock.json", "upstreamPin": "cursor/UPSTREAM.json"}
+}

@@ -1,0 +1,12 @@
+{
+  "url": "https://github.com/ElPandaP/vscode-auto-disable-extensions",
+  "commit": "1f11a3a0f16adf99c3d7852370ec92bdadae0b50",
+  "version": "0.2.2",
+  "license": "MIT",
+  "modifications": [
+    "workspace-local serialized state",
+    "workspace-only guarded writes with rollback",
+    "conservative incomplete scans",
+    "automatic default and extension rules"
+  ]
+}

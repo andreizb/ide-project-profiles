@@ -1,0 +1,46 @@
+{
+  "anysphere.remote-ssh": "always",
+  "anysphere.remote-containers": "always",
+  "redhat.java": {
+    "languages": [
+      "java"
+    ],
+    "files": [
+      "**/pom.xml",
+      "**/*.gradle",
+      "**/*.gradle.kts",
+      "**/.classpath"
+    ]
+  },
+  "james-yu.latex-workshop": {
+    "languages": [
+      "latex",
+      "tex",
+      "bibtex",
+      "context"
+    ],
+    "files": [
+      "**/*.tex",
+      "**/*.ltx",
+      "**/*.bib",
+      "**/*.sty",
+      "**/*.cls"
+    ]
+  },
+  "oracle.sql-developer": {
+    "languages": [
+      "oracle-sql",
+      "sql",
+      "apexlang"
+    ],
+    "files": [
+      "**/*.sql",
+      "**/*.plsql",
+      "**/*.pkb",
+      "**/*.pks",
+      "**/*.pls",
+      "**/*.apx",
+      "**/*.apex"
+    ]
+  }
+}
