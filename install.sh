@@ -6,6 +6,8 @@ cleanup() { rm -rf -- "$WORK"; }
 trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
+mkdir -p "$WORK/tmp"
+export TMPDIR="$WORK/tmp"
 command -v python3 >/dev/null || { echo 'Python 3.9+ is required.' >&2; exit 1; }
 command -v curl >/dev/null || { echo 'curl is required.' >&2; exit 1; }
 REF="${IDE_PROFILES_REF:-main}"
