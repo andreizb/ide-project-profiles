@@ -15,3 +15,4 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund && npm run typecheck && npm run build && npm test
         working-directory: cursor
       - run: bash -n install.sh && python3 -m py_compile manage.py build.py run_tests.py cursor/pack.py cursor/verify_host.py
+      - run: python3 tests/test_installer_transport.py
